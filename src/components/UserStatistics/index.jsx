@@ -135,6 +135,7 @@ class AccountStatistics extends Component {
                 <TableCell>New Followers</TableCell>
                 <TableCell>Followers</TableCell>
                 <TableCell>Following</TableCell>
+                <TableCell>Direct Message</TableCell>
                 <TableCell>Created</TableCell>
               </TableRow>
             </TableHead>
@@ -145,6 +146,7 @@ class AccountStatistics extends Component {
                     <TableCell>{row.newFollowers}</TableCell>
                     <TableCell>{row.followers}</TableCell>
                     <TableCell>{row.following}</TableCell>
+                    <TableCell>{row.dm}</TableCell>
                     <TableCell>{row.day}</TableCell>
                   </TableRow>
                 )

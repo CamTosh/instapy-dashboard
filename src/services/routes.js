@@ -31,9 +31,11 @@ routes.get('/get_all_activities', function (req, res) {
                sum(recActivity.follows) as follows,
                sum(recActivity.unfollows) as unfollows,
                sum(recActivity.server_calls) as server_calls,
+               count(message.sent_message_at) as dm,
                strftime('%Y-%m-%d', recActivity.created) as day_filter
       FROM recordActivity as recActivity 
-      LEFT JOIN profiles as prof ON recActivity.profile_id = prof.id
+        LEFT JOIN profiles as prof ON recActivity.profile_id = prof.id
+        LEFT JOIN message on strftime('%Y-%m-%d', recActivity.created) = strftime('%Y-%m-%d', message.sent_message_at)
       GROUP BY day_filter, profile_id
       ORDER BY recActivity.created desc`,
       { type: sequelize.QueryTypes.SELECT }).then(rows => {
@@ -52,13 +54,15 @@ routes.get('/get_all_activities', function (req, res) {
 routes.get('/get_all_user_statistics', function (req, res) {
   try {
     sequelize.query(
-      `SELECT rowid,
+      `SELECT accountsProgress.rowid,
               followers,
               following,
               total_posts,
               max(created),
-              strftime('%Y-%m-%d', created) as day
+              strftime('%Y-%m-%d', created) as day,
+              count(message.sent_message_at) as dm
       FROM accountsProgress
+        LEFT JOIN message on strftime('%Y-%m-%d', date('now')) = strftime('%Y-%m-%d', message.sent_message_at)
       WHERE profile_id = ?
       GROUP BY day
       ORDER BY created asc`,

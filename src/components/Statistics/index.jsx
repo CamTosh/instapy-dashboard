@@ -85,6 +85,7 @@ class UserDbData extends Component {
                 <TableCell>profile</TableCell>
                 <TableCell>likes</TableCell>
                 <TableCell>comments</TableCell>
+                <TableCell>direct message</TableCell>
                 <TableCell>follows</TableCell>
                 <TableCell>unfollows</TableCell>
                 <TableCell>server calls</TableCell>
@@ -103,6 +104,7 @@ class UserDbData extends Component {
                     </TableCell>
                     <TableCell>{row.likes}</TableCell>
                     <TableCell>{row.comments}</TableCell>
+                    <TableCell>{row.dm}</TableCell>
                     <TableCell>{row.follows}</TableCell>
                     <TableCell>{row.unfollows}</TableCell>
                     <TableCell>{row.server_calls}</TableCell>
